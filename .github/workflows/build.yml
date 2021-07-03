@@ -14,7 +14,9 @@ on:
       # ignore staging branch used by bors, this is handled by bors.yml
       - 'staging'
 
-  # Workflows that commit on github don't generate the push event(?) so trigger here
+  # The push event isn't triggered by the "upgrade lean" workflow even though it pushes.
+  # See https://github.community/t/push-from-action-does-not-trigger-subsequent-action/16854
+  # Workaround: trigger when that event completes.
   workflow_run:
     workflows: ["upgrade lean"]
     types:
