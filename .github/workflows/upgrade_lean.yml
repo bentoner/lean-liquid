@@ -10,8 +10,8 @@ jobs:
     name: upgrade lean and dependencies
 
     steps:
-      name: upgrade lean and dependencies
-      uses: leanprover-contrib/lean-upgrade-action@master
-      with:
-        repo: ${{ github.repository }}
-        access-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: upgrade lean and dependencies
+        uses: leanprover-contrib/lean-upgrade-action@master
+        with:
+          repo: ${{ github.repository }}
+          access-token: ${{ secrets.GITHUB_TOKEN }}
