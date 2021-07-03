@@ -15,7 +15,7 @@ on:
       - 'staging'
 
   # Workflows that commit on github don't generate the push event(?) so trigger here
-  workflow-run:
+  workflow_run:
     workflows: ["upgrade lean"]
     types:
       - completed
