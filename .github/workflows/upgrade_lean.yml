@@ -1,5 +1,5 @@
 on:
-  workflow_dispach:
+  workflow_dispatch:
   schedule:
     - cron: '4/5 16 * * *' # once a day at 2am UTC
 
