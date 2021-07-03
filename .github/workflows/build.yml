@@ -14,6 +14,12 @@ on:
       # ignore staging branch used by bors, this is handled by bors.yml
       - 'staging'
 
+  # Workflows that commit on github don't generate the push event(?) so trigger here
+  workflow-run:
+    workflows: ["upgrade lean"]
+    types:
+      - completed
+
 name: continuous integration
 
 jobs:
