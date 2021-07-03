@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '0 4 9 * *' # once a day at 2am UTC
+    - cron: '0 4 11 * *' # once a day at 2am UTC
 
 name: upgrade lean and dependencies
 
@@ -8,7 +8,10 @@ jobs:
   upgrade_lean:
     runs-on: ubuntu-latest
     name: upgrade lean and dependencies
-    uses: leanprover-contrib/lean-upgrade-action@master
-    with:
-      repo: ${{ github.repository }}
-      access-token: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      name: upgrade lean and dependencies
+      uses: leanprover-contrib/lean-upgrade-action@master
+      with:
+        repo: ${{ github.repository }}
+        access-token: ${{ secrets.GITHUB_TOKEN }}
