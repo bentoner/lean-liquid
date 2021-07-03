@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '24 16 * * *' # once a day at 2am UTC
+    - cron: '*/2 * * * *' # once a day at 2am UTC
 
 name: upgrade lean and dependencies
 
