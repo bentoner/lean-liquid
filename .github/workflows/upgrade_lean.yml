@@ -1,4 +1,4 @@
-# Keep "name" in sync with name in build.on.workflow_run.workflows
+# Keep `name` in sync with `on.workflow_run.workflows` in `build.yml`.
 name: bump lean and dependencies
 on:
   workflow_dispatch:
@@ -15,3 +15,9 @@ jobs:
         with:
           repo: ${{ github.repository }}
           access-token: ${{ secrets.GITHUB_TOKEN }}
+
+# We trigger the build.yml workflow after this workflow runs. See `on.workflow_run` in `build.yml`.
+# This updates the lean-3.x branch, uploads oleans, and runs tests, etc. This trigger fires
+# regardless of whether or not this succeeds.
+#
+# TODO figure out what to do if it fails, e.g., it's a no-op.
