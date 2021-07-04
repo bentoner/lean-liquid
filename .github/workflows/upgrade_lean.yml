@@ -16,7 +16,8 @@ jobs:
         uses: leanprover-contrib/lean-upgrade-action@master
         with:
           repo: ${{ github.repository }}
-          access-token: ${{ secrets.GITHUB_TOKEN }}
+          access-token: ${{ secrets.PA_TOKEN }}
+
 
 # We trigger the build.yml workflow after this workflow runs. See `on.workflow_run` in `build.yml`.
 # This updates the lean-3.x branch, uploads oleans, and runs tests, etc. This trigger fires
