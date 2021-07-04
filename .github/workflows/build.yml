@@ -18,7 +18,7 @@ on:
   # See https://github.community/t/push-from-action-does-not-trigger-subsequent-action/16854
   # Workaround: trigger when that event completes.
   workflow_run:
-    workflows: ["upgrade lean"]
+    workflows: ["bump lean and dependencies"]
     types:
       - completed
 

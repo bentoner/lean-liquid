@@ -1,19 +1,17 @@
+# Keep "name" in sync with name in build.on.workflow_run.workflows
+name: bump lean and dependencies
 on:
   workflow_dispatch:
   schedule:
-    - cron: '4/5 16 * * *' # once a day at 2am UTC
+    - cron: '0 2 * * *' # once a day at 2am UTC
 
 jobs:
   upgrade_lean:
     runs-on: ubuntu-latest
-    name: Bump Lean and dependency versions
+    name: Bump lean and dependencies
     steps:
-      - name: checkout project
-        uses: actions/checkout@v2
-      - name: upgrade Lean and dependencies
+      - name: Upgrade lean and dependencies
         uses: leanprover-contrib/lean-upgrade-action@master
         with:
           repo: ${{ github.repository }}
           access-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: update version branches
-        uses: leanprover-contrib/update-versions-action@master
