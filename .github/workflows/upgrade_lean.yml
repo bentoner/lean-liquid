@@ -1,18 +1,21 @@
+name: bump lean and dependencies
 on:
+  workflow_dispatch: ~
   schedule:
     - cron: '0 2 * * *' # once a day at 2am UTC
 
 jobs:
   upgrade_lean:
     runs-on: ubuntu-latest
-    name: Bump Lean and dependency versions
+    name: Bump lean and dependencies
     steps:
       - name: checkout project
         uses: actions/checkout@v2
-      - name: upgrade Lean and dependencies
+      - name: upgrade lean and dependencies
         uses: leanprover-contrib/lean-upgrade-action@master
         with:
           repo: ${{ github.repository }}
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: update version branches
-        uses: leanprover-contrib/update-versions-action@master
+          # We need to use a personal access token here, not secrets.GITHUB_TOKEN, in order that
+          # this action trigger the build.yml workflow if it pushes a commit to master. See
+          # https://github.community/t/push-from-action-does-not-trigger-subsequent-action/16854
+          access-token: ${{ secrets.PA_TOKEN }}
