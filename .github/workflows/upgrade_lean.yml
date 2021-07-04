@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Bump lean and dependencies
     steps:
-      - name: Upgrade lean and dependencies
+      - name: checkout project
+-        uses: actions/checkout@v2
+      - name: upgrade lean and dependencies
         uses: leanprover-contrib/lean-upgrade-action@master
         with:
           repo: ${{ github.repository }}
