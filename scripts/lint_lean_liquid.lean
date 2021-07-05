@@ -95,8 +95,8 @@ meta def enabled_linters : list name :=
   let enabled_linter_names := list.map (λ x, "linter." ++ x) [
     "check_type",
     "def_lemma",
-    -- "doc_blame",
-    -- "unused_arguments",
+    "doc_blame",
+    "unused_arguments",
     "dup_namespace",
     "ge_or_gt",
     "has_coe_to_fun",
