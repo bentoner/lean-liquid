@@ -1,6 +1,7 @@
 name: update nolints
 
 on:
+  workflow_dispatch: ~
   schedule:
     - cron: "0 0 * * *"
 
@@ -31,25 +32,28 @@ jobs:
           python-version: 3.8
 
       - name: try to find olean cache
+        continue-on-error: true
         run: ./scripts/fetch_olean_cache.sh
 
       - name: leanpkg build
         id: build
         run: |
           leanpkg configure
-          lean --json -T100000 --make src | python scripts/detect_errors.py
+          lean --json --make src | python scripts/detect_errors.py
 
       - name: lint
         run: |
           ./scripts/mk_all.sh
-          lean --run scripts/lint_mathlib.lean
+          lean --run scripts/lint_lean_liquid.lean
           mv nolints.txt scripts/nolints.txt
-          ./scripts/update-style-exceptions.sh
+          # ./scripts/update-style-exceptions.sh
           git diff
 
+      # TODO can we replace this with the version from upgrade_lean.yml?
       - name: configure git setup
+        # We need to use a personal access token here. See the comment in upgrade_lean.yml.
         run: |
-          git remote add origin-bot "https://leanprover-community-bot:${{ secrets.LCB_TOKEN }}@github.com/leanprover-community/mathlib.git"
+          git remote add origin-bot "https://leanprover-community-bot:${{ secrets.PA_TOKEN }}@github.com/leanprover-community/mathlib.git"
           git config user.email "leanprover.community@gmail.com"
           git config user.name "leanprover-community-bot"
 
@@ -61,4 +65,4 @@ jobs:
       - name: update nolints.txt
         run: ./scripts/update_nolints.sh
         env:
-          DEPLOY_GITHUB_TOKEN: ${{ secrets.LCB_TOKEN }}
+          DEPLOY_GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
