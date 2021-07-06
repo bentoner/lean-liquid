@@ -31,7 +31,7 @@ jobs:
 
       # This is to figure out if lean-upgrade-action updated master.
       - name: record HEAD of master
-        run: INITIAL_HEAD=$(git rev-parse HEAD)
+        run: git rev-parse HEAD > /tmp/INITIAL_HEAD
 
       - name: upgrade lean and dependencies
         uses: leanprover-contrib/lean-upgrade-action@master
@@ -42,7 +42,7 @@ jobs:
       # TODO: upload oleans if we generated a new commit.
       - name: upload oleans if necessary
         run: |
-          if [[ $INITIAL_HEAD != $(git rev-parse HEAD) ]]; then
+          if [[ $(cat /tmp/INITIAL_HEAD) == $(git rev-parse HEAD) ]]; then
             echo "TODO upload oleans"
             echo "INTIAL_HEAD: $INITIAL_HEAD"
             echo "current HEAD: $(git rev-parse HEAD)"
