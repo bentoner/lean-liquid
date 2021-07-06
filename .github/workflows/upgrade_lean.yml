@@ -44,6 +44,10 @@ jobs:
         run: |
           if [[ $INITIAL_HEAD != $(git rev-parse HEAD) ]]; then
             echo "TODO upload oleans"
+            echo "INTIAL_HEAD: $INITIAL_HEAD"
+            echo "current HEAD: $(git rev-parse HEAD)"
+            git status
+            git diff
           else
             echo "master branch was not updated"
           fi
