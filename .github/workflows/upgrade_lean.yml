@@ -42,9 +42,9 @@ jobs:
       # TODO: upload oleans if we generated a new commit.
       - name: upload oleans if necessary
         run: |
-          if [[ $(cat /tmp/INITIAL_HEAD) == $(git rev-parse HEAD) ]]; then
+          if [[ $(cat /tmp/INITIAL_HEAD) != $(git rev-parse HEAD) ]]; then
             echo "TODO upload oleans"
-            echo "INTIAL_HEAD: $INITIAL_HEAD"
+            echo "INTIAL_HEAD: $(cat /tmp/INITIAL_HEAD)"
             echo "current HEAD: $(git rev-parse HEAD)"
             git status
             git diff
