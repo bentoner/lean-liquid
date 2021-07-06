@@ -78,7 +78,7 @@ jobs:
           lean --json --make src | python scripts/detect_errors.py
 
       - name: push release to azure
-        if: always() && (github.repository == 'leanprover-community/lean-liquid' || github.repository == 'bentoner/lean-liquid') && steps.build.outputs.started == 'true' && github.ref == 'refs/heads/master'
+        if: always() && github.repository == 'leanprover-community/lean-liquid' && steps.build.outputs.started == 'true' && github.ref == 'refs/heads/master'
         continue-on-error: true
         run: |
           archive_name="$(git rev-parse HEAD).tar.xz"
