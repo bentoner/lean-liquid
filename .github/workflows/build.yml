@@ -70,6 +70,14 @@ jobs:
         continue-on-error: true
         run: ./scripts/fetch_olean_cache.sh
 
+      - name: memory and swap
+        run: |
+          echo "Memory and swap:"
+          free -h
+          echo
+          swapon --show
+          echo
+
       - name: leanpkg build
         id: build
         run: |
