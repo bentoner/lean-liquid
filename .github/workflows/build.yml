@@ -70,13 +70,11 @@ jobs:
         continue-on-error: true
         run: ./scripts/fetch_olean_cache.sh
 
-      - name: memory and swap
-        run: |
-          echo "Memory and swap:"
-          free -h
-          echo
-          swapon --show
-          echo
+      # Reduce swap size for testing
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@master
+        with:
+          swap-size-gb: 2
 
       - name: leanpkg build
         id: build
