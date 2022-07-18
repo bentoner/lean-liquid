@@ -74,6 +74,7 @@ jobs:
         id: build
         run: |
           echo "::set-output name=started::true"
+          find src -name "*.olean" -exec md5sum {} \; | awk '{print $2,$1}' | sort > olean_hashes_at_start.txt
           lean --json --make src | python scripts/detect_errors.py
           echo "Run 1 complete at $(date +'%T')"
           find src -name "*.olean" -exec md5sum {} \; | awk '{print $2,$1}' | sort > olean_hashes_after_run_1.txt
