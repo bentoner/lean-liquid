@@ -66,9 +66,9 @@ jobs:
       - name: get mathlib cache
         run: leanproject get-mathlib-cache || true
 
-      - name: try to find olean cache
-        continue-on-error: true
-        run: ./scripts/fetch_olean_cache.sh
+      # - name: try to find olean cache
+      #   continue-on-error: true
+      #   run: ./scripts/fetch_olean_cache.sh
 
       # Reduce swap size for testing
       - name: Set Swap Space
