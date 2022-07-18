@@ -70,11 +70,10 @@ jobs:
       #   continue-on-error: true
       #   run: ./scripts/fetch_olean_cache.sh
 
-      # Reduce swap size for testing
       - name: Set Swap Space
         uses: pierotofy/set-swap-space@master
         with:
-          swap-size-gb: 2
+          swap-size-gb: 4
 
       - name: leanpkg build
         id: build
