@@ -39,6 +39,15 @@ jobs:
     outputs:
       artifact_name: ${{ steps.setup_precompiled.outputs.artifact_name }}
     steps:
+      - name: test without pipefail
+        run: |
+          python -c "exit(1)" | :
+
+      - name: test with pipefail
+        run: |
+          set -o pipefail
+          python -c "exit(1)" | :
+
       - name: bump swap space
         uses: pierotofy/set-swap-space@master
         with:
